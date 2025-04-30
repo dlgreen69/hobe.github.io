@@ -3,81 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Landing Page</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Redirect Landing Page</title>
+    <script>
+        // Function to check for a proxy (basic example, customizable)
+        function detectProxy() {
+            // Try to detect proxy headers (basic check, not foolproof)
+            const proxyHeaders = [
+                'HTTP_VIA',
+                'HTTP_X_FORWARDED_FOR',
+                'HTTP_FORWARDED_FOR',
+                'HTTP_X_FORWARDED',
+                'HTTP_FORWARDED',
+                'HTTP_CLIENT_IP',
+                'HTTP_PROXY_CONNECTION'
+            ];
+
+            // Check if any proxy-related headers are present
+            const isProxy = proxyHeaders.some(header => {
+                return navigator[header] !== undefined;
+            });
+
+            // Redirect based on detection
+            if (!isProxy) {
+                // No proxy detected, redirect to the target page
+                window.location.href = "https://example.com";
+            } else {
+                // Proxy detected, show a message or handle differently
+                alert("Proxy detected! Access is restricted.");
+            }
+        }
+
+        // Run the detection on page load
+        window.onload = detectProxy;
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 400px;
-            max-width: 90%;
-            padding: 20px;
             text-align: center;
-        }
-        h1 {
+            background-color: #f4f4f9;
             color: #333;
-            margin-bottom: 20px;
+            margin: 0;
+            padding: 20px;
         }
-        form {
-            display: flex;
-            flex-direction: column;
+
+        h1 {
+            margin-top: 50px;
         }
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        button {
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        button {
-            background-color: #28a745;
-            color: white;
-            cursor: pointer;
-            border: none;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        .footer {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        .footer a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        .footer a:hover {
-            text-decoration: underline;
+
+        p {
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Register Now</h1>
-        <form action="/submit_registration" method="POST">
-            <input type="text" name="fullname" placeholder="Full Name" required>
-            <input type="email" name="email" placeholder="Email Address" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-            <button type="submit">Sign Up</button>
-        </form>
-        <div class="footer">
-            Already have an account? <a href="/login">Log In</a>
-        </div>
-    </div>
+    <h1>Redirecting...</h1>
+    <p>If you are not automatically redirected, please <a href="https://example.com">click here</a>.</p>
 </body>
 </html>
